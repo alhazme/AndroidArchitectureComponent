@@ -1,6 +1,7 @@
 package me.alhaz.tutorial.architecturecomponent.viewmodels.movies.list
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import me.alhaz.tutorial.architecturecomponent.helper.valueobject.Resource
@@ -9,8 +10,11 @@ import me.alhaz.tutorial.architecturecomponent.models.repositories.movie.local.e
 
 class MovieListViewModel(private val movieRepository: MovieRepository): ViewModel() {
 
+    var movies: LiveData<Resource<PagedList<MovieEntity>>> = MutableLiveData()
+
     fun getListMovie(): LiveData<Resource<PagedList<MovieEntity>>> {
-        return movieRepository.getListMovie()
+        movies = movieRepository.getListMovie()
+        return movies
     }
 
 }

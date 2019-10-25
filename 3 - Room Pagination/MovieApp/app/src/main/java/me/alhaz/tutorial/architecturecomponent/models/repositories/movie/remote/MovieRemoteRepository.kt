@@ -30,15 +30,15 @@ class MovieRemoteRepository {
                     }
                 }
                 else {
-
+                    moviesLiveData.postValue(ApiResponse.error(response.message().toString(), null))
                 }
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                // todo change to ApiResonse.error(message, object)
-                moviesLiveData.postValue(null)
+                moviesLiveData.postValue(ApiResponse.error(t.localizedMessage, null))
             }
         })
+
         return moviesLiveData
     }
 
@@ -54,13 +54,12 @@ class MovieRemoteRepository {
                     }
                 }
                 else {
-
+                    movieLiveData.postValue(ApiResponse.error(response.message().toString(), null))
                 }
             }
 
             override fun onFailure(call: Call<Movie>, t: Throwable) {
-                // todo change to ApiResonse.error(message, object)
-                movieLiveData.postValue(null)
+                movieLiveData.postValue(ApiResponse.error(t.localizedMessage, null))
             }
         })
         return movieLiveData

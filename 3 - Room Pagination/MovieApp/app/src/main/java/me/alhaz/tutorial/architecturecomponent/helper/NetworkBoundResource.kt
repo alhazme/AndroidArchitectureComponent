@@ -65,7 +65,9 @@ abstract class NetworkBoundResource<ResultType, RequestType>
 
                 SUCCESS -> {
                     appExecutor.diskIO().execute {
-                        saveCallResult(response.body)
+                        response.body?.let { body ->
+                            saveCallResult(response.body)
+                        }
                         appExecutor.mainThread().execute {
                             result.addSource(loadFromDb()) { newData ->
                                 setValue(Resource.success(newData))
@@ -85,7 +87,9 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                 ERROR -> {
                     onFetchFailed()
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.message, newData))
+                        response.message?.let { message ->
+                            setValue(Resource.error(message, newData))
+                        }
                     }
                 }
             }
