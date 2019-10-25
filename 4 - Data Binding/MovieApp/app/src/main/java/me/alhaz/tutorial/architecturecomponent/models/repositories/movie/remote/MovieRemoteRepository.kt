@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import me.alhaz.tutorial.architecturecomponent.BuildConfig
 import me.alhaz.tutorial.architecturecomponent.helper.RetrofitConfig
 import me.alhaz.tutorial.architecturecomponent.helper.valueobject.ApiResponse
+import me.alhaz.tutorial.architecturecomponent.helper.valueobject.Resource
 import me.alhaz.tutorial.architecturecomponent.models.repositories.movie.remote.response.Movie
 import me.alhaz.tutorial.architecturecomponent.models.repositories.movie.remote.response.MovieResponse
 import retrofit2.Call
@@ -30,15 +31,15 @@ class MovieRemoteRepository {
                     }
                 }
                 else {
-
+                    moviesLiveData.postValue(ApiResponse.error(response.message().toString(), null))
                 }
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                // todo change to ApiResonse.error(message, object)
-                moviesLiveData.postValue(null)
+                moviesLiveData.postValue(ApiResponse.error(t.localizedMessage, null))
             }
         })
+
         return moviesLiveData
     }
 
@@ -54,13 +55,12 @@ class MovieRemoteRepository {
                     }
                 }
                 else {
-
+                    movieLiveData.postValue(ApiResponse.error(response.message().toString(), null))
                 }
             }
 
             override fun onFailure(call: Call<Movie>, t: Throwable) {
-                // todo change to ApiResonse.error(message, object)
-                movieLiveData.postValue(null)
+                movieLiveData.postValue(ApiResponse.error(t.localizedMessage, null))
             }
         })
         return movieLiveData

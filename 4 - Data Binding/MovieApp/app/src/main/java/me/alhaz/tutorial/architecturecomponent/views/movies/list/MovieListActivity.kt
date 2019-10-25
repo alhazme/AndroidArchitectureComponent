@@ -4,11 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_movie_list.*
 import me.alhaz.tutorial.architecturecomponent.R
+import me.alhaz.tutorial.architecturecomponent.databinding.ActivityMovieListBinding
 import me.alhaz.tutorial.architecturecomponent.helper.valueobject.Status.SUCCESS
 import me.alhaz.tutorial.architecturecomponent.helper.valueobject.Status.ERROR
 import me.alhaz.tutorial.architecturecomponent.helper.valueobject.Status.EMPTY
@@ -18,12 +19,13 @@ import me.alhaz.tutorial.architecturecomponent.views.movies.detail.MovieDetailAc
 
 class MovieListActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMovieListBinding
     private lateinit var viewModel: MovieListViewModel
     private lateinit var movieListAdapter: MovieListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_list)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_list)
 
         setupLayout()
         setupAdapter()
@@ -31,15 +33,15 @@ class MovieListActivity : AppCompatActivity() {
     }
 
     fun setupLayout() {
-        rvMovies.setHasFixedSize(true)
-        rvMovies.layoutManager = LinearLayoutManager(this)
+        binding.rvMovies.setHasFixedSize(true)
+        binding.rvMovies.layoutManager = LinearLayoutManager(this)
     }
 
     fun setupAdapter() {
         movieListAdapter = MovieListAdapter(this, clickListener = { movie ->
             openDetailMoviePage(movie.id)
         })
-        rvMovies.adapter = movieListAdapter
+        binding.rvMovies.adapter = movieListAdapter
     }
 
     private fun obtainViewModel(): MovieListViewModel {
@@ -54,18 +56,18 @@ class MovieListActivity : AppCompatActivity() {
                 when (response.status) {
                     SUCCESS -> {
                         response.data?.let { movies ->
-                            progressBar.visibility = View.GONE
-                            rvMovies.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.GONE
+                            binding.rvMovies.visibility = View.VISIBLE
                             movieListAdapter.submitList(movies)
                         }
                     }
                     EMPTY -> {
-                        progressBar.visibility = View.GONE
-                        rvMovies.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        binding.rvMovies.visibility = View.GONE
                     }
                     ERROR -> {
-                        progressBar.visibility = View.GONE
-                        rvMovies.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        binding.rvMovies.visibility = View.GONE
                     }
                 }
             }

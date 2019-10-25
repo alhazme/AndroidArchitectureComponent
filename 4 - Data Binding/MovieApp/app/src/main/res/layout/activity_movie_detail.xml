@@ -1,159 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".views.movies.detail.MovieDetailActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
-        android:id="@+id/svBackground"
+    <data>
+        <variable
+            name="viewModel"
+            type="me.alhaz.tutorial.architecturecomponent.viewmodels.movies.detail.MovieDetailViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone">
+        android:background="@color/colorBackground"
+        tools:context=".views.movies.detail.MovieDetailActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layBackground"
+        <ScrollView
+            android:id="@+id/svBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/ivPhoto"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                app:srcCompat="@drawable/poster_dragon_ball"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="movie_photo" />
-
-            <TextView
-                android:id="@+id/tvYear"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layBackground"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivPhoto"
-                android:text="2018"
-                android:textSize="12sp"
-                android:textColor="@color/colorGray"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"/>
+                android:background="@color/colorBackground">
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:maxLines="2"
-                android:text="Title"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/ivPhoto"
-                app:layout_constraintTop_toBottomOf="@+id/tvYear" />
-
-            <ImageView
-                android:id="@+id/ivRuntime"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:tint="@color/colorGray"
-                android:src="@drawable/ic_time"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-                app:layout_constraintStart_toEndOf="@+id/ivPhoto"
-                android:contentDescription="runtime"/>
-
-            <TextView
-                android:id="@+id/tvRuntime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1h 59m"
-                android:textSize="12sp"
-                android:textColor="@color/colorGray"
-                app:layout_constraintStart_toEndOf="@+id/ivRuntime"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"/>
-
-            <LinearLayout
-                android:id="@+id/lyScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/shape_rounded"
-                app:layout_constraintTop_toBottomOf="@+id/ivRuntime"
-                app:layout_constraintStart_toEndOf="@+id/ivPhoto"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp">
+                <ImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    app:srcCompat="@drawable/poster_dragon_ball"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:contentDescription="movie_photo"
+                    app:poster="@{viewModel.movie.posterPath}" />
 
                 <TextView
-                    android:id="@+id/tvScore"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvYear"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Score"
-                    android:textColor="@color/colorBlack"
-                    android:textAlignment="center"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivPhoto"
+                    android:text="2018"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorGray"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:year="@{viewModel.movie.releaseDate}" />
 
                 <TextView
-                    android:id="@+id/tvRating"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="85"
-                    android:textSize="18sp"
-                    android:textColor="@color/colorBlack"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:maxLines="2"
+                    android:text="@{viewModel.movie.title}"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/ivPhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/tvYear" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivRuntime"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:tint="@color/colorGray"
+                    android:src="@drawable/ic_time"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    app:layout_constraintStart_toEndOf="@+id/ivPhoto"
+                    android:contentDescription="runtime"/>
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                android:textSize="14sp"
-                android:textColor="@color/colorGray"
-                android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/ivPhoto"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"/>
+                <TextView
+                    android:id="@+id/tvRuntime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1h 59m"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorGray"
+                    app:layout_constraintStart_toEndOf="@+id/ivRuntime"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:runtime="@{viewModel.movie.runtime}"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/lyScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_rounded"
+                    app:layout_constraintTop_toBottomOf="@+id/ivRuntime"
+                    app:layout_constraintStart_toEndOf="@+id/ivPhoto"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp">
 
-    </ScrollView>
+                    <TextView
+                        android:id="@+id/tvScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Score"
+                        android:textColor="@color/colorBlack"
+                        android:textAlignment="center"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/svBackground"
-        app:layout_constraintEnd_toEndOf="@+id/svBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/svBackground"
-        style="?android:attr/progressBarStyle" />
+                    <TextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="85"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        app:rating="@{viewModel.movie.voteAverage}"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.movie.overview}"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorGray"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/ivPhoto"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.49"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/svBackground"
+            app:layout_constraintEnd_toEndOf="@+id/svBackground"
+            app:layout_constraintBottom_toBottomOf="@+id/svBackground"
+            style="?android:attr/progressBarStyle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
