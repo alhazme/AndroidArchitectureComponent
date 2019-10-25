@@ -7,7 +7,7 @@ import me.alhaz.tutorial.architecturecomponent.models.repositories.movie.local.e
 
 class MovieDetailViewModel(private val movieRepository: MovieRepository): ViewModel() {
 
-    private var movie = MutableLiveData<MovieEntity>()
+    var movie = MutableLiveData<MovieEntity>()
 
     fun getMovieDetail(movieID: Long): MutableLiveData<MovieEntity> {
         val movieEntity = movieRepository.getDetailMovie(movieID)
